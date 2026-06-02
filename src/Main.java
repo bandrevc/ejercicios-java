@@ -15,15 +15,13 @@ public class Main
         text = text.toUpperCase();
         String[] characters = text.split("");
         int contador = 0;
-        for (int i = 0; i < characters.length; i++) {
-            if(characters[i].equals("A") || characters[i].equals("E") ||
-                      characters[i].equals("I") || characters[i].equals("O") ||
-                      characters[i].equals("U")) {
-                contador = contador + 1;
-            }
+        final String VOWELS = "AEIOU";
+        for (String character : characters) {
+            if (VOWELS.contains(character))
+                contador++;
         }
-              System.out.println("Texto: " + text);
-              System.out.println("Cantidad de vocales: " + contador);
+        System.out.println("Texto: " + text);
+        System.out.println("Cantidad de vocales: " + contador);
     }
     /*
     Crear un algoritmo que multiplique 2 números sin usar el operador de multiplicación. Por ejemplo:
@@ -33,9 +31,8 @@ public class Main
     public static void exercice2(int multiplicador, int multiplicando) {
         int contador = 0;
         for(int i = 0; i < multiplicador; i++){
-            contador = contador + multiplicando;
+            contador += multiplicando;
         }
-        System.out.println("Producto: " + Integer.toString(contador));
+        System.out.println("Producto: " + contador);
     }
-
 }
