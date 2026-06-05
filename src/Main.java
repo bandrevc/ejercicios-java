@@ -2,6 +2,10 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+        // Investiga cómo leer del teclado y aplicarlo a todos los ejercicios.
+        // Agregar validaciones a todos los ejercicios
+        exercise8("   Arroz con leche  ");
+        /*
         exercise1("Algoritmo de  la felicidad");
         exercice2(5, 10);
         exercise3(3, 4);
@@ -10,7 +14,7 @@ public class Main {
         exercise6(4);
         exercise7(10);
         exercise8("Arroz con leche");
-        exercise9("Amor", "Roma");
+        exercise9("Amor", "Roma");*/
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -22,16 +26,22 @@ public class Main {
     Cantidad de vocales: 10
     */
     public static void exercise1(String text) {
-        text = text.toUpperCase();
-        String[] characters = text.split("");
-        int contador = 0;
-        final String VOWELS = "AEIOU";
-        for (String character : characters) {
-            if (VOWELS.contains(character))
-                contador++;
+        text = text.trim().toUpperCase();
+        if (text.isEmpty()) {
+            System.out.println("Debes ingresar un texto");
         }
-        System.out.println("Texto: " + text);
-        System.out.println("Cantidad de vocales: " + contador);
+        else {
+            String[] characters = text.split("");
+            int contador = 0;
+            final String VOWELS = "AEIOU";
+            // [""]
+            for (String character : characters) {
+                if (VOWELS.contains(character))
+                    contador++;
+            }
+            System.out.println("Texto: " + text);
+            System.out.println("Cantidad de vocales: " + contador);
+        }
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -42,7 +52,7 @@ public class Main {
     */
     public static void exercice2(int multiplicador, int multiplicando) {
         int contador = 0;
-        for (int i = 0; i < multiplicador; i++) {
+        for (int i = 0; i < Math.abs(multiplicador); i++) {
             contador += multiplicando;
         }
         System.out.println("Producto: " + contador);
@@ -89,14 +99,15 @@ public class Main {
 */
     public static void exercise5(String text) {
         String[] characters = text.split("");
+        // "manuel" -> ["m", "a", ...] -> ["m", "", "n", "", "", "l"]
         final String VOWELS = "aeiou";
-        for (int i = 0; i < characters.length; i++) {
-            if (VOWELS.contains(characters[i])) {
-                characters[i] = "";
-            }
+        String textWithoutVowels = "";
+        // "manuel" | "" -> "mnl"
+        for (String character : characters) {
+            if (!VOWELS.contains(character))
+                textWithoutVowels += character;
         }
-        String resultado = String.join("", characters);
-        System.out.println("Texto sin vocales: " + resultado);
+        System.out.println("Texto sin vocales: " + textWithoutVowels);
     }
     //------------------------------------------------------------------------------------------------------------------
     /* Realizar un algoritmo que dado un número, te muestre su
@@ -110,11 +121,12 @@ public class Main {
          4 x 4 = 16
          ...
    */
-    public static void exercise6(int number) {
-        System.out.println("Número:" + number);
+    public static void exercise6(int multiplier) {
+        System.out.println("Número:" + multiplier);
         System.out.println("Tabla de multiplicar:");
-        for (int i = 1; i <= 12; i++) {
-            System.out.println(number + " X " + i + " = " + (number * i));
+        for (int multiplying = 1; multiplying <= 12; multiplying++) {
+            int product = multiplying * multiplier;
+            System.out.println(multiplier + " X " + multiplying + " = " + product);
         }
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -124,14 +136,18 @@ public class Main {
             Número n: 10
             Suma de 1 a n: 1 + 2 + 3… + 10 = 55
     */
-    public static void exercise7(int numberN) {
-        System.out.println("Numero n: " + numberN);
-        int formula = numberN * (numberN + 1) / 2;
-        String contador = "";
-        for (int i = 2; i <= numberN; i++) {
-            contador = contador + " + " + i;
+    public static void exercise7(int lastTerm) {
+        System.out.println("Numero n: " + lastTerm);
+        int sum = calculateNaturalNumberSum(lastTerm);
+        String numberChain = "";
+        for (int i = 2; i <= lastTerm; i++) {
+            numberChain = numberChain + " + " + i;
         }
-        System.out.println("Suma de 1 a n: 1" + contador + " = " + formula);
+        System.out.println("Suma de 1 a n: 1" + numberChain + " = " + sum);
+    }
+    // f(x) = n * (n+1)/2
+    private static int calculateNaturalNumberSum(int lastTerm) {
+        return lastTerm * (lastTerm + 1) / 2;
     }
     //------------------------------------------------------------------------------------------------------------------
     /*Hacer una función que devuelva el reverso de una cadena de texto. Por ejemplo:
@@ -140,13 +156,22 @@ public class Main {
         Texto al revés: “ehcel noc zorrA”
 */
     public static void exercise8(String text) {
+        text = text.trim();
         System.out.println("Texto: " + text);
         String[] characters = text.split("");
-        String backwards = "";
-        for (int i = characters.length - 1; i >= 0; i--) {
-            backwards = backwards + characters[i];
+        String textInReverse = "";
+        // Código imperativo
+        // ¿Qué debe hacer y cómo lo va a hacer?
+        /*for (int i = characters.length - 1; i >= 0; i--) {
+            textInReverse = textInReverse + characters[i];
+        }*/
+
+        // Código declarativo
+        // ¿Qué debe hacer?
+        for (String character : characters) {
+            textInReverse = character + textInReverse;
         }
-        System.out.println("Texto al revés: " + backwards);
+        System.out.println("Texto al revés: " + textInReverse);
     }
     //------------------------------------------------------------------------------------------------------------------
     /*Realizar un algoritmo que dado 2 textos, verifique si el segundo es un anagrama
