@@ -4,15 +4,26 @@ public class Main {
     public static void main(String[] args) {
         // Investiga cómo leer del teclado y aplicarlo a todos los ejercicios.
         // Agregar validaciones a todos los ejercicios
-        exercise1();
-        exercise2();
-        exercise3();
-        exercise4();
         exercise5();
-        exercise6();
-        exercise7();
-        exercise8();
-        exercise9();
+        /*
+        // Imperativo: Código que describe qué hacer y cómo hacerlo
+        int[] numbers = new int[] { 1, 2, 3, 4, 5 };
+        for (int i = 0; i < numbers.length; i++) {
+            int number = numbers[i];
+            if (number % 2 == 0)
+                System.out.println(number + " es par");
+            else
+                System.out.println(number + " es impar");
+        }
+
+        // Declarativo: Código que describe qué hacer
+        for (int number : numbers) {
+            if (number % 2 == 0)
+                System.out.println(number + " es par");
+            else
+                System.out.println(number + " es impar");
+        }
+        * */
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -34,9 +45,8 @@ public class Main {
         } else {
             String[] characters = text.split("");
             int contador = 0;
-            final String VOWELS = "AEIOUaeiou";
             for (String character : characters) {
-                if (VOWELS.contains(character)) {
+                if (isVowel(character)) {
                     contador++;
                 }
             }
@@ -202,22 +212,27 @@ public class Main {
     public static void exercise5() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Escribe un texto: ");
+        // " Manuel"
         String text = sc.nextLine().trim();
-        if (text.trim().isEmpty()) {
+        if (text.isEmpty()) {
             System.out.println("Error: No ingresaste nada o solo pusiste espacios.");
         } else if (text.matches(".*\\d.*")) {
             System.out.println("Error: El texto no debería contener números.");
         } else {
             String[] characters = text.split("");
-            final String VOWELS = "aeiouAEIOU";
             String textWithoutVowels = "";
             for (String character : characters) {
-                if (!VOWELS.contains(character) && !character.equals(" ")) {
+                if (!isVowel(character)) {
                     textWithoutVowels += character;
                 }
             }
             System.out.println("Texto sin vocales: " + textWithoutVowels);
         }
+    }
+
+    private static boolean isVowel(String character) {
+        final String VOWELS = "aeiouáéíóú";
+        return VOWELS.contains(character.toLowerCase());
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -237,14 +252,24 @@ public class Main {
         final String ALLOWED_DIGITS = "0123456789";
         System.out.println("Escriba un numero: ");
         String input = sc.next().trim();
-        for (int i = 0; i < input.length(); i++) {
+        // "Manuel" ->
+        // input.toCharArray();
+        // new char[] { 'M', 'a', 'n', ... }
+        for (char character : input.toCharArray()) {
+            String characterAsText = "" + character;
+            if (!ALLOWED_DIGITS.contains(characterAsText)) {
+                System.out.println("Error: Solo se permiten números enteros.");
+                return;
+            }
+        }
+        /*for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
             String characterAsText = "" + c;
             if (!ALLOWED_DIGITS.contains(characterAsText)) {
                 System.out.println("Error: Solo se permiten números enteros.");
                 return;
             }
-        }
+        }*/
         int multiplier = Integer.parseInt(input);
         System.out.println("Número: " + multiplier);
         System.out.println("Tabla de multiplicar:");
@@ -342,6 +367,8 @@ public class Main {
             } else if (second.matches(".*\\d.*")) {
                 System.out.println("Error: La segunda palabra no debería contener números.");
             } else {
+                /*
+                // 3° nivel abstracción
                 // Ambas variables ya están limpias y validadas de forma independiente
                 char[] charactersFirst = first.toUpperCase().toCharArray();
                 char[] charactersSecond = second.toUpperCase().toCharArray();
@@ -352,7 +379,35 @@ public class Main {
                 } else {
                     System.out.println("No es un anagrama");
                 }
+                * */
+                /*
+
+                // 2° nivel de abstracción
+                // Ambas variables ya están limpias y validadas de forma independiente
+                char[] charactersFirst = sortCharacters(first);
+                char[] charactersSecond = sortCharacters(second);
+                if (Arrays.equals(charactersFirst, charactersSecond)) {
+                    System.out.println("Es un anagrama");
+                } else {
+                    System.out.println("No es un anagrama");
+                }
+                * */
+
+                // 3° nivel de abstracción
+                if (isAnagram(first, second)) {
+                    System.out.println("Es un anagrama");
+                } else {
+                    System.out.println("No es un anagrama");
+                }
             }
         }
+    }
+    private static boolean isAnagram(String valueA, String valueB) {
+        return Arrays.equals(sortCharacters(valueA), sortCharacters(valueB));
+    }
+    private static char[] sortCharacters(String value) {
+        char[] characters = value.toUpperCase().toCharArray();
+        Arrays.sort(characters);
+        return characters;
     }
 }
