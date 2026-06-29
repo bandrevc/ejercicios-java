@@ -2,28 +2,16 @@ import java.util.Arrays;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        // Investiga cómo leer del teclado y aplicarlo a todos los ejercicios.
-        // Agregar validaciones a todos los ejercicios
-        exercise5();
-        /*
-        // Imperativo: Código que describe qué hacer y cómo hacerlo
-        int[] numbers = new int[] { 1, 2, 3, 4, 5 };
-        for (int i = 0; i < numbers.length; i++) {
-            int number = numbers[i];
-            if (number % 2 == 0)
-                System.out.println(number + " es par");
-            else
-                System.out.println(number + " es impar");
-        }
-
-        // Declarativo: Código que describe qué hacer
-        for (int number : numbers) {
-            if (number % 2 == 0)
-                System.out.println(number + " es par");
-            else
-                System.out.println(number + " es impar");
-        }
-        * */
+        //exercise1();
+        //exercise2();
+        //exercise3();
+        //exercise4();
+        //exercise5();
+        //exercise6();
+        //exercise7();
+        //exercise8();
+        //exercise9();
+        exercise10();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -36,23 +24,16 @@ public class Main {
     */
     public static void exercise1() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Debes ingresar un texto:");
-        String text = sc.nextLine().trim();
-        if (text.isEmpty()) {
-            System.out.println("Error: No ingresaste nada o solo pusiste espacios.");
-        } else if (text.matches(".*\\d.*")) {
-            System.out.println("Error: El texto no debería contener números.");
-        } else {
-            String[] characters = text.split("");
-            int contador = 0;
-            for (String character : characters) {
-                if (isVowel(character)) {
-                    contador++;
-                }
+        String text = getValidText(sc, "Debes ingresar un texto: ");
+        String[] characters = text.split("");
+        int contador = 0;
+        for (String character : characters) {
+            if (isVowel(character)) {
+                contador++;
             }
-            System.out.println("Texto válido: " + text);
-            System.out.println("Cantidad de vocales: " + contador);
         }
+        System.out.println("Texto válido: " + text);
+        System.out.println("Cantidad de vocales: " + contador);
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -63,31 +44,8 @@ public class Main {
     */
     public static void exercise2() {
         Scanner sc = new Scanner(System.in);
-        final String ALLOWED_DIGITS = "0123456789";
-        // Validación para el Multiplicando
-        System.out.print("Multiplicando: ");
-        String input1 = sc.next().trim();
-        for (int i = 0; i < input1.length(); i++) {
-            char c = input1.charAt(i);
-            String characterAsText = "" + c;
-            if (!ALLOWED_DIGITS.contains(characterAsText)) {
-                System.out.println("Error: Solo se permiten números enteros.");
-                return;
-            }
-        }
-        int multiplicand = Integer.parseInt(input1);
-        //Validacion para el multiplicador
-        System.out.print("Multiplicador: ");
-        String input2 = sc.next().trim();
-        for (int i = 0; i < input2.length(); i++) {
-            char c = input2.charAt(i);
-            String characterAsText = "" + c;
-            if (!ALLOWED_DIGITS.contains(characterAsText)) {
-                System.out.println("Error: Solo se permiten números enteros.");
-                return;
-            }
-        }
-        int multiplier = Integer.parseInt(input2);
+        int multiplicand = getValidInt(sc, "Multiplicando: ");
+        int multiplier = getValidInt(sc, "Multiplicador: ");
         int product = 0;
         for (int i = 0; i < multiplier; i++) {
             product += multiplicand;
@@ -105,37 +63,13 @@ public class Main {
 */
     public static void exercise3() {
         Scanner sc = new Scanner(System.in);
-        final String ALLOWED_DIGITS = "0123456789";
-        // Validacion del vector X
-        System.out.print("Vector componente X: ");
-        String inputX = sc.next().trim();
-        for (int i = 0; i < inputX.length(); i++) {
-            char c = inputX.charAt(i);
-            String characterAsText = "" + c;
-            if (!ALLOWED_DIGITS.contains(characterAsText)) {
-                System.out.println("Error: Solo se permiten números enteros.");
-                return;
-            }
-        }
-        int vectorX = Integer.parseInt(inputX);
-        // Validacion del vector y
-        System.out.print("Vector componente Y: ");
-        String inputY = sc.next().trim();
-        for (int i = 0; i < inputY.length(); i++) {
-            char c = inputY.charAt(i);
-            String characterAsText = "" + c;
-            if (!ALLOWED_DIGITS.contains(characterAsText)) {
-                System.out.println("Error: Solo se permiten números enteros.");
-                return;
-            }
-        }
-        int vectorY = Integer.parseInt(inputY);
+        int vectorX = getValidInt(sc, "Vector componente X: ");
+        int vectorY = getValidInt(sc, "Vector componente Y: ");
         double magnitude = Math.sqrt((vectorX * vectorX) + (vectorY * vectorY));
         System.out.println("Vector componente X: " + vectorX);
         System.out.println("Vector componente Y: " + vectorY);
         System.out.println("El resultado es " + magnitude);
     }
-
     //------------------------------------------------------------------------------------------------------------------
     /*Crear un algoritmo que, dados dos vectores (x1, y2) y (x2, y2),
     determine su producto punto (|A|.|B| = (Ax1 * Ax2, Ay1 * Ay2). Por ejemplo:
@@ -149,55 +83,10 @@ public class Main {
 */
     public static void exercise4() {
         Scanner sc = new Scanner(System.in);
-        final String ALLOWED_DIGITS = "0123456789";
-        // Validation for X1 component
-        System.out.print("Vector componente X1: ");
-        String inputX1 = sc.next().trim();
-        for (int i = 0; i < inputX1.length(); i++) {
-            char c = inputX1.charAt(i);
-            String characterAsText = "" + c;
-            if (!ALLOWED_DIGITS.contains(characterAsText)) {
-                System.out.println("Error: Solo se permiten números enteros.");
-                return;
-            }
-        }
-        int vectorX1 = Integer.parseInt(inputX1);
-        // Validation for Y1 component
-        System.out.print("Vector componente Y1: ");
-        String inputY1 = sc.next().trim();
-        for (int i = 0; i < inputY1.length(); i++) {
-            char c = inputY1.charAt(i);
-            String characterAsText = "" + c;
-            if (!ALLOWED_DIGITS.contains(characterAsText)) {
-                System.out.println("Error: Solo se permiten números enteros.");
-                return;
-            }
-        }
-        int vectorY1 = Integer.parseInt(inputY1);
-        // Validation for X2 component
-        System.out.print("Vector componente X2: ");
-        String inputX2 = sc.next().trim();
-        for (int i = 0; i < inputX2.length(); i++) {
-            char c = inputX2.charAt(i);
-            String characterAsText = "" + c;
-            if (!ALLOWED_DIGITS.contains(characterAsText)) {
-                System.out.println("Error: Solo se permiten números enteros.");
-                return;
-            }
-        }
-        int vectorX2 = Integer.parseInt(inputX2);
-        // Validation for Y2 component
-        System.out.print("Vector componente Y2: ");
-        String inputY2 = sc.next().trim();
-        for (int i = 0; i < inputY2.length(); i++) {
-            char c = inputY2.charAt(i);
-            String characterAsText = "" + c;
-            if (!ALLOWED_DIGITS.contains(characterAsText)) {
-                System.out.println("Error: Solo se permiten números enteros.");
-                return;
-            }
-        }
-        int vectorY2 = Integer.parseInt(inputY2);
+        int vectorX1 = getValidInt(sc, "Vector componente X1: ");
+        int vectorY1 = getValidInt(sc, "Vector componente Y1: ");
+        int vectorX2 = getValidInt(sc, "Vector componente X2: ");
+        int vectorY2 = getValidInt(sc, "Vector componente Y2: ");
         int componentX = vectorX1 * vectorX2;
         int componentY = vectorY1 * vectorY2;
         System.out.println("Producto punto es: (" + componentX + ", " + componentY + ")");
@@ -211,29 +100,17 @@ public class Main {
 */
     public static void exercise5() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Escribe un texto: ");
-        // " Manuel"
-        String text = sc.nextLine().trim();
-        if (text.isEmpty()) {
-            System.out.println("Error: No ingresaste nada o solo pusiste espacios.");
-        } else if (text.matches(".*\\d.*")) {
-            System.out.println("Error: El texto no debería contener números.");
-        } else {
-            String[] characters = text.split("");
-            String textWithoutVowels = "";
-            for (String character : characters) {
-                if (!isVowel(character)) {
-                    textWithoutVowels += character;
-                }
+        String text = getValidText(sc, "Escribe un texto: ");
+        String[] characters = text.split("");
+        String textWithoutVowels = "";
+        for (String character : characters) {
+            if (!isVowel(character)) {
+                textWithoutVowels += character;
             }
-            System.out.println("Texto sin vocales: " + textWithoutVowels);
         }
+        System.out.println("Texto sin vocales: " + textWithoutVowels);
     }
 
-    private static boolean isVowel(String character) {
-        final String VOWELS = "aeiouáéíóú";
-        return VOWELS.contains(character.toLowerCase());
-    }
 
     //------------------------------------------------------------------------------------------------------------------
     /* Realizar un algoritmo que dado un número, te muestre su
@@ -249,28 +126,7 @@ public class Main {
    */
     public static void exercise6() {
         Scanner sc = new Scanner(System.in);
-        final String ALLOWED_DIGITS = "0123456789";
-        System.out.println("Escriba un numero: ");
-        String input = sc.next().trim();
-        // "Manuel" ->
-        // input.toCharArray();
-        // new char[] { 'M', 'a', 'n', ... }
-        for (char character : input.toCharArray()) {
-            String characterAsText = "" + character;
-            if (!ALLOWED_DIGITS.contains(characterAsText)) {
-                System.out.println("Error: Solo se permiten números enteros.");
-                return;
-            }
-        }
-        /*for (int i = 0; i < input.length(); i++) {
-            char c = input.charAt(i);
-            String characterAsText = "" + c;
-            if (!ALLOWED_DIGITS.contains(characterAsText)) {
-                System.out.println("Error: Solo se permiten números enteros.");
-                return;
-            }
-        }*/
-        int multiplier = Integer.parseInt(input);
+        int multiplier = getValidInt(sc, "Escriba un numero: ");
         System.out.println("Número: " + multiplier);
         System.out.println("Tabla de multiplicar:");
         for (int multiplying = 1; multiplying <= 12; multiplying++) {
@@ -288,18 +144,7 @@ public class Main {
     */
     public static void exercise7() {
         Scanner sc = new Scanner(System.in);
-        final String ALLOWED_DIGITS = "0123456789";
-        System.out.println("Escriba un numero: ");
-        String input = sc.next().trim();
-        for (int i = 0; i < input.length(); i++) {
-            char c = input.charAt(i);
-            String characterAsText = "" + c;
-            if (!ALLOWED_DIGITS.contains(characterAsText)) {
-                System.out.println("Error: Solo se permiten números enteros.");
-                return;
-            }
-        }
-        int lastTerm = Integer.parseInt(input);
+        int lastTerm = getValidInt(sc, "Escriba un numero: ");
         System.out.println("Numero n: " + lastTerm);
         int sum = calculateNaturalNumberSum(lastTerm);
         String numberChain = "";
@@ -309,9 +154,6 @@ public class Main {
         System.out.println("Suma de 1 a n: 1" + numberChain + " = " + sum);
     }
 
-    private static int calculateNaturalNumberSum(int lastTerm) {
-        return lastTerm * (lastTerm + 1) / 2;
-    }
 
 
     //------------------------------------------------------------------------------------------------------------------
@@ -323,13 +165,7 @@ public class Main {
     public static void exercise8() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Escriba un texto: ");
-        String text = sc.nextLine().trim();
-        // Validación de vacío y de números
-        if (text.isEmpty()) {
-            System.out.println("Error: No ingresaste nada o solo pusiste espacios.");
-        } else if (text.matches(".*\\d.*")) {
-            System.out.println("Error: El texto no debería contener números.");
-        } else {
+        String text = getValidText(sc, "Escriba un texto: ");
             System.out.println("Texto: " + text);
             String[] characters = text.split("");
             String textInReverse = "";
@@ -338,7 +174,6 @@ public class Main {
             }
             System.out.println("Texto al revés: " + textInReverse);
         }
-    }
 
     //------------------------------------------------------------------------------------------------------------------
     /*Realizar un algoritmo que dado 2 textos, verifique si el segundo es un anagrama
@@ -351,63 +186,78 @@ public class Main {
     */
     public static void exercise9() {
         Scanner sc = new Scanner(System.in);
-        //VALIDACIÓN DE LA PRIMERA PALABRA
-        System.out.print("Primera palabra: ");
-        String first = sc.nextLine().trim();
-        if (first.isEmpty()) {
-            System.out.println("Error: No ingresaste nada o solo pusiste espacios en la primera palabra.");
-        } else if (first.matches(".*\\d.*")) {
-            System.out.println("Error: La primera palabra no debería contener números.");
+        String first = getValidText(sc, "Primera palabra: ");
+        String second = getValidText(sc, "Segunda palabra: ");
+        if (isAnagram(first, second)) {
+            System.out.println("Es un anagrama");
         } else {
-            //VALIDACIÓN DE LA SEGUNDA PALABRA
-            System.out.print("Segunda palabra: ");
-            String second = sc.nextLine().trim();
-            if (second.isEmpty()) {
-                System.out.println("Error: No ingresaste nada o solo pusiste espacios en la segunda palabra.");
-            } else if (second.matches(".*\\d.*")) {
-                System.out.println("Error: La segunda palabra no debería contener números.");
-            } else {
-                /*
-                // 3° nivel abstracción
-                // Ambas variables ya están limpias y validadas de forma independiente
-                char[] charactersFirst = first.toUpperCase().toCharArray();
-                char[] charactersSecond = second.toUpperCase().toCharArray();
-                Arrays.sort(charactersFirst);
-                Arrays.sort(charactersSecond);
-                if (Arrays.equals(charactersFirst, charactersSecond)) {
-                    System.out.println("Es un anagrama");
-                } else {
-                    System.out.println("No es un anagrama");
-                }
-                * */
-                /*
-
-                // 2° nivel de abstracción
-                // Ambas variables ya están limpias y validadas de forma independiente
-                char[] charactersFirst = sortCharacters(first);
-                char[] charactersSecond = sortCharacters(second);
-                if (Arrays.equals(charactersFirst, charactersSecond)) {
-                    System.out.println("Es un anagrama");
-                } else {
-                    System.out.println("No es un anagrama");
-                }
-                * */
-
-                // 3° nivel de abstracción
-                if (isAnagram(first, second)) {
-                    System.out.println("Es un anagrama");
-                } else {
-                    System.out.println("No es un anagrama");
+            System.out.println("No es un anagrama");
                 }
             }
-        }
+    //------------------------------------------------------------------------------------------------------------------
+    /*Realizar un algoritmo que, dado un texto, muestre el caracter inicial y final. Considerar validar
+    que el texto no esté vacío ni con solo espacios. Por ejemplo:
+        Texto: “Vampires will never hurt you”
+        Caracter inicial: “V”
+        Caracter final: “u”
+     */
+    public static void exercise10() {
+        Scanner sc = new Scanner(System.in);
+        String text = getValidText(sc, "Escriba un texto: ");
+        char initialChar = text.charAt(0);
+        char finalChar = text.charAt(text.length() - 1);
+        System.out.println("Caracter inicial: \"" + initialChar + "\"");
+        System.out.println("Caracter final: \"" + finalChar + "\"");
     }
+
+
+    //------------------------------------------------------------------------------------------------------------------
+    //Primer Método
     private static boolean isAnagram(String valueA, String valueB) {
         return Arrays.equals(sortCharacters(valueA), sortCharacters(valueB));
     }
+    //Segundo método
     private static char[] sortCharacters(String value) {
         char[] characters = value.toUpperCase().toCharArray();
         Arrays.sort(characters);
         return characters;
     }
+    //Tercer Método
+    private static int getValidInt(Scanner sc, String mensaje) {
+        final String ALLOWED_DIGITS = "0123456789";
+        System.out.print(mensaje);
+        String input = sc.next().trim();
+        for (char c : input.toCharArray()) {
+            String characterAsText = "" + c;
+            if (!ALLOWED_DIGITS.contains(characterAsText)) {
+                System.out.println("Error: Solo se permiten números enteros.");
+                System.exit(0);
+            }
+        }
+        return Integer.parseInt(input);
+    }
+    //Cuarto Método
+    private static boolean isVowel(String character) {
+        final String VOWELS = "aeiouáéíóú";
+        return VOWELS.contains(character.toLowerCase());
+    }
+    // Quinto Método
+    private static String getValidText(Scanner sc, String mensaje) {
+        System.out.print(mensaje);
+        String text = sc.nextLine().trim();
+        if (text.isEmpty()) {
+            System.out.println("Error: No ingresaste nada o solo pusiste espacios.");
+            System.exit(0);
+        }
+        if (text.matches(".*\\d.*")) {
+            System.out.println("Error: El texto no debería contener números.");
+            System.exit(0);
+        }
+        return text;
+    }
+    // Sexto Método
+    private static int calculateNaturalNumberSum(int lastTerm) {
+        return lastTerm * (lastTerm + 1) / 2;
+    }
 }
+
